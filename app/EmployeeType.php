@@ -15,4 +15,9 @@ class EmployeeType extends Model
     {
         return $this->belongsToMany('App\Entry');
     }
+
+    public function roles()
+    {
+        $this->belongsToMany('App\Role');
+    }
 }

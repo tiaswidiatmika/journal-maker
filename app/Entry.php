@@ -15,4 +15,11 @@ class Entry extends Model
     {
         return $this->belongsToMany('App\EmployeeType');
     }
+
+    // role - entry relation
+    // this has one to many inverse
+    public function role()
+    {
+        return $this->belongsTo('App\Role');
+    }
 }
