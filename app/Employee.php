@@ -15,4 +15,10 @@ class Employee extends Model
     {
         return $this->belongsToMany('App\Entry');
     }
+
+    // employee - role relation
+    public function roles()
+    {
+        $this->belongsToMany('App\Role');
+    }
 }
