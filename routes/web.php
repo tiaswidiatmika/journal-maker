@@ -1,6 +1,8 @@
 <?php
 
+use App\Employee;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::post('/task', function(Request $request){
+    $employeeId = $request->input('employee_id');
+    $entry = $request->input('entries');
+
+    dd(compact('entry', 'employeeId'));
+
+    $employee = Employee::find($employeeId);
+    $employee->entries()->attach($entry);
 });

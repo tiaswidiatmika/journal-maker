@@ -13,6 +13,6 @@ class Employee extends Model
 
     public function entries()
     {
-        return $this->hasMany('App\Entry');
+        return $this->belongsToMany('App\Entry');
     }
 }
