@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Employee;
+use App\Role;
 
 class TaskController extends Controller
 {
@@ -35,8 +36,10 @@ class TaskController extends Controller
      */
     public function store()
     {
-        $employee = Employee::all();
-        return $employee;
+
+        // $employee = Employee::all();
+        // return $employee;
+        // $uri =
     }
 
     /**
@@ -45,9 +48,12 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        
+        return $entries = Role::with('entries')->get();
+        // return $employee = Employee::with(['employeeType', ])->find($id);
+        // $employee;
+        // employeeType()->roles()->entries();
     }
 
     /**

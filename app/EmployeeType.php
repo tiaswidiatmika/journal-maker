@@ -18,6 +18,6 @@ class EmployeeType extends Model
 
     public function roles()
     {
-        $this->belongsToMany('App\Role');
+        $this->hasMany('App\Role');
     }
 }

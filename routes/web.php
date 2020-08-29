@@ -28,3 +28,5 @@ Route::post('/task', function(Request $request){
     $employee = Employee::find($employeeId);
     $employee->entries()->attach($entry);
 });
+
+Route::get('/task/employee/{id}', 'TaskController@show');

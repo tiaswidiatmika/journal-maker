@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
-    public function employeeTypes()
+    public function employeeType()
     {
         return $this->belongsTo('App\EmployeeType');
     }
