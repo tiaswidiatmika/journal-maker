@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/task', function(Request $request){
+Route::get('/task', function(Request $request){
     $employeeId = $request->input('employee_id');
     $entry = $request->input('entries');
 
