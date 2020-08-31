@@ -11,7 +11,7 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        // RoleSeeder will seed both 'roles table' and 'entries table' simultaneously
+        
         $calonJftRoles = [
             'Menyiapkan bahan perlengkapan yang diperlukan untuk melancarkan kegiatan pemeriksaan keimigrasian di Tempat Pemeriksaan Imigrasi',
             'Mencatat kebutuhan bahan dalam kegiatan pemeriksaan keimigrasian di Tempat Pemeriksaan Imigrasi',
@@ -25,6 +25,7 @@ class RoleSeeder extends Seeder
         ];
 
         foreach ($calonJftRoles as $key => $value) {
+
             DB::table('roles')->insert([
                 'role_desc' => $value,
             ]);    
