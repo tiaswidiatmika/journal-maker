@@ -19,14 +19,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/task', function(Request $request){
-    $employeeId = $request->input('employee_id');
-    $entry = $request->input('entries');
+Route::get('/playground', 'KhontyController@index');
 
-    dd(compact('entry', 'employeeId'));
+// Route::get('/task', function(Request $request){
+//     $employeeId = $request->input('employee_id');
+//     $entry = $request->input('entries');
 
-    $employee = Employee::find($employeeId);
-    $employee->entries()->attach($entry);
-});
+//     dd(compact('entry', 'employeeId'));
+
+//     $employee = Employee::find($employeeId);
+//     $employee->entries()->attach($entry);
+// });
+
+Route::get('/task', 'TaskController@index');
 
 Route::get('/task/employee/{id}', 'TaskController@show');
