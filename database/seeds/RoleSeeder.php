@@ -65,6 +65,7 @@ class RoleSeeder extends Seeder
 
             DB::table('roles')->insert([
                 'employee_type_id' => 1,
+                'unit' => $value['unit'],
                 'role_desc' => $value['desc'],
                 'target' => $value['target'],
             ]);    
