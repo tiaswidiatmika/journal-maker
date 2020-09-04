@@ -8,7 +8,7 @@ class Role extends Model
 {
     public function employeeTypes()
     {
-        return $this->belongsToMany('App\EmployeeType');
+        return $this->belongsTo('App\EmployeeType');
     }
 
     // role - entries relation
