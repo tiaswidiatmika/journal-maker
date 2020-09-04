@@ -32,5 +32,6 @@ Route::get('/playground', 'KhontyController@index');
 // });
 
 Route::get('/task', 'TaskController@index');
+Route::get('/employeetype-role/{id}', 'TaskController@show');
 
 Route::get('/task/employee/{id}', 'TaskController@show');
