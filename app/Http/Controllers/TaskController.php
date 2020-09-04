@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Employee;
+use App\EmployeeType;
+use App\Role;
 
 // use Nesbotak\Carbon
 class TaskController extends Controller
@@ -17,12 +20,11 @@ class TaskController extends Controller
         $weeksInYear = floor($daysInYear / $daysInWeek); // should be 45 weeks a year
         $workingDaysInYear = ($weeksInYear * $workingDays) + ($daysInYear % $daysInWeek); // should be 276 working days a year without national holidays
 
-        // get interval
-        $interval = floor($daysInYear / ($totalPoint / $point));
-        $daysToCompletePoint = $interval < 1 ? 0 : floor($daysInYear / $interval);
-        if ($interval < 1 || $daysToCompletePoint > $workingDaysInYear) {
-            $interval = $this->getFillingSchema($totalPoint, $point + 1)->interval;
-        }
+        $remainingDays = $daysInYear - Carbon::now()->format('z'); // get remaining days
+        $interval = floor( $daysInYear / $totalPoint ); // get interval
+        $interval = $interval < 1 ? 1 : $interval; // handle interval less than 1
+        $point = $totalPoint / $remainingDays; // get general point per role
+        $point = $point < 1 ? ceil($point) : floor($point); // ceil up if point less than 1, floor down if point more than 1
         return (object) compact('interval', 'point');
     }
 
@@ -78,7 +80,7 @@ class TaskController extends Controller
 
             if ($shift !== 'off' && $dayDiff >= $interval && $role['remaining_point'] > 0) {
                 $pointsPerFill = ($role['remaining_point'] - $pointsPerFill) < 0 ? $role['remaining_point'] : $pointsPerFill;
-                echo "perlu diinsert dengan point sebanyak {$pointsPerFill} </br>";
+                echo "perlu diinsert dengan point sebanyak {$pointsPerFill} dengan interval {$interval} hari </br>";
             } else {
                 echo 'ndak perlu diinsert </br>';
             }
@@ -119,9 +121,10 @@ class TaskController extends Controller
     public function show($id)
     {
         // return $entries = Role::with('entries')->get();
-        // return $employee = Employee::with(['employeeType', ])->find($id);
-        // $employee;
-        // employeeType()->roles()->entries();
+        $employee = Employee::with(['employeeType'])->find($id);
+        $employeeTypeId = $employee->only('employee_type_id');
+        $roles = Role::where('employee_type_id', $employeeTypeId)->get();
+        return compact('employee', 'roles');
     }
 
     /**
