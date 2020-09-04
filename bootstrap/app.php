@@ -15,6 +15,8 @@ $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
 
+ini_set('xdebug.max_nesting_level', 1024);
+
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces
