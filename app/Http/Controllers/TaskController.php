@@ -120,11 +120,11 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        // return $entries = Role::with('entries')->get();
-        $employee = Employee::with(['employeeType'])->find($id);
-        $employeeTypeId = $employee->only('employee_type_id');
-        $roles = Role::where('employee_type_id', $employeeTypeId)->get();
-        return compact('employee', 'roles');
+        $employee = Employee::with(['employeeType', 'employeeType.roles', 'employeeType.roles.entries'])->find($id);
+        foreach ($employee->employeeType->roles as $role) {
+            $role->random_entry = $role->entries->random();
+        }
+        return compact('employee');
     }
 
     /**
